@@ -1,8 +1,9 @@
 document.addEventListener("DOMContentLoaded", function() {
     fetch("https://api.coindesk.com/v1/bpi/currentprice.json")
-        .then(response => {
-            if (!response.ok) {
-                throw new Error(`HTTP error! Status: ${response.status}`);
+    .then(response => response.json())
+    .then(data => console.log("Data Loaded Successfully:", data))
+    .catch(error => console.error("Failed to fetch data:", error));
+
             }
             return response.json();
         })
