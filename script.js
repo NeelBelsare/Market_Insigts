@@ -1,4 +1,4 @@
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function () {
     const marketContainer = document.getElementById("market-container");
 
     if (!marketContainer) {
@@ -6,7 +6,10 @@ document.addEventListener("DOMContentLoaded", function() {
         return;
     }
 
-    fetch("https://api.coindesk.com/v1/bpi/currentprice.json")
+    const url = "https://api.coindesk.com/v1/bpi/currentprice.json";
+    const proxyUrl = "https://cors-anywhere.herokuapp.com/";
+
+    fetch(proxyUrl + url)
         .then(response => {
             if (!response.ok) {
                 throw new Error(`HTTP error! Status: ${response.status}`);
@@ -21,7 +24,8 @@ document.addEventListener("DOMContentLoaded", function() {
             `;
         })
         .catch(error => {
-            console.error('❌ Error fetching data:', error);
-            marketContainer.innerHTML = "<p>Failed to load data. Please try again later.</p>";
+            console.error("❌ Error fetching data:", error);
+            marketContainer.innerHTML =
+                "<p>Failed to load data. Please try again later.</p>";
         });
 });
